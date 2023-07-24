@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddusvhi5g8ne3"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_31gbs"]
+[ext_resource type="PackedScene" uid="uid://co0xd7w6j3bnp" path="res://scenes/player.tscn" id="1_wos3e"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_31gbs")
+
+[node name="Player" parent="." instance=ExtResource("1_wos3e")]
+position = Vector2(640, 360)
+
+[node name="Lasers" type="Node2D" parent="."]
