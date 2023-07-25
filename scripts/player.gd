@@ -7,11 +7,19 @@ signal laser_shot(laser)
 
 @onready var muzzle = $Muzzle
 
+
 var laser_scene = preload("res://scenes/laser.tscn")
 
+var shoot_cd = false
+var rate_0f_fire = 0.2  
+
 func _process(delta):
-	if Input.is_action_just_pressed("shoot") :
-		shoot_laser()
+	if Input.is_action_pressed("shoot") :
+		if !shoot_cd:
+			shoot_cd = true
+			shoot_laser()
+			await get_tree().create_timer(rate_0f_fire).timeout  
+			shoot_cd = false
 
 func _physics_process(delta):
 	var input_vector := Vector2(0,Input.get_axis("move_forward","move_backward"))
@@ -25,7 +33,7 @@ func _physics_process(delta):
 		rotate(deg_to_rad(-rotation_speed*delta))
 	
 	if input_vector.y == 0:
-		velocity = velocity.move_toward(Vector2.ZERO,3)
+		velocity = velocity.move_toward(Vector2.ZERO,5)
 	
 	move_and_slide()
 
@@ -45,3 +53,4 @@ func shoot_laser():
 	l.global_position = muzzle.global_position
 	l.rotation = rotation
 	emit_signal("laser_shot",l)
+	
