@@ -2,15 +2,15 @@
 
 [ext_resource type="Script" path="res://scripts/Asteroid.gd" id="1_tvwmn"]
 [ext_resource type="Texture2D" uid="uid://lkykvy8kdb7y" path="res://assets/PNG/Meteors/meteorBrown_big4.png" id="2_gixv8"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_csjxx"]
-radius = 44.0114
+[ext_resource type="Shape2D" uid="uid://bxuxt437fvhm4" path="res://resources/asteroid_cshape_large.tres" id="3_3mvr8"]
 
 [node name="Asteroid" type="Area2D"]
+collision_layer = 4
+collision_mask = 11
 script = ExtResource("1_tvwmn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_gixv8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_csjxx")
+shape = ExtResource("3_3mvr8")

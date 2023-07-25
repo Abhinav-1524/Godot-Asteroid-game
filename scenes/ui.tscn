@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://l6ml4msv2571"]
+
+[ext_resource type="FontFile" uid="uid://d1mpa17nrq407" path="res://assets/Bonus/Minecrafter.Alt.ttf" id="1_smwqt"]
+[ext_resource type="Script" path="res://scripts/score.gd" id="1_tq3kp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_of0ds"]
+font = ExtResource("1_smwqt")
+font_size = 48
+font_color = Color(1, 1, 1, 0.803922)
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 17.0
+offset_right = 314.0
+offset_bottom = 87.0
+text = "SCORE : 9999"
+label_settings = SubResource("LabelSettings_of0ds")
+script = ExtResource("1_tq3kp")
