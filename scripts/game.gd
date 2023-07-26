@@ -7,6 +7,8 @@ extends Node2D
 @onready var hud = $UI/HUD
 @onready var game_over_screen = $UI/GameOverScreen
 @onready var player_spawn_pos = $PlayerSpawnPos
+@onready var player_spawn_area = $PlayerSpawnPos/PlayerSpawnArea
+
 
 var asteroid_scene = preload("res://scenes/asteroid.tscn")
 
@@ -36,9 +38,11 @@ func _process(delta):
 		get_tree().reload_current_scene()
 	
 func _on_player_laser_shot(laser):
+	$LaserSound.play()
 	lasers.add_child(laser)
 
 func _on_asteroid_exploded(pos, size,points):
+	$AsteroidHitSound.play()
 	score += points
 	for i in range(2):
 		match size:
@@ -48,7 +52,7 @@ func _on_asteroid_exploded(pos, size,points):
 				spawn_asteroid(pos,Asteroid.AsteroidSize.SMALL)
 			Asteroid.AsteroidSize.SMALL:
 				pass
-	print(score)
+	
 	
 func spawn_asteroid(pos, size):
 	var a = asteroid_scene.instantiate()
@@ -59,12 +63,16 @@ func spawn_asteroid(pos, size):
 	
 	
 func _on_player_died():
+	$PlayerDieSound.play()
 	lives -= 1
+	player.global_position = player_spawn_pos.global_position
 	if lives <=0:
 		await get_tree().create_timer(2).timeout
 		game_over_screen.visible = true
 	else:
 		await get_tree().create_timer(1).timeout
+		while !player_spawn_area.is_empty:
+			await get_tree().create_timer(0.1).timeout
 		player.respawn(player_spawn_pos.global_position)
 	
 
