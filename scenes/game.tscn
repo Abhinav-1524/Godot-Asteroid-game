@@ -1,16 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://ddusvhi5g8ne3"]
+[gd_scene load_steps=6 format=3 uid="uid://ddusvhi5g8ne3"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_31gbs"]
 [ext_resource type="PackedScene" uid="uid://co0xd7w6j3bnp" path="res://scenes/player.tscn" id="1_wos3e"]
-[ext_resource type="PackedScene" uid="uid://l6ml4msv2571" path="res://scenes/ui.tscn" id="2_8b7gy"]
+[ext_resource type="PackedScene" uid="uid://by6lwpqga2w04" path="res://scenes/hud.tscn" id="2_fedxf"]
 [ext_resource type="PackedScene" uid="uid://nh8gi2aer8qg" path="res://scenes/asteroid.tscn" id="3_fahw2"]
+[ext_resource type="PackedScene" uid="uid://blkigagvqv023" path="res://scenes/game_over_screen.tscn" id="3_ooed7"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_31gbs")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="UI" parent="UI" instance=ExtResource("2_8b7gy")]
+[node name="HUD" parent="UI" instance=ExtResource("2_fedxf")]
+
+[node name="GameOverScreen" parent="UI" instance=ExtResource("3_ooed7")]
+visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_wos3e")]
 position = Vector2(640, 360)
@@ -33,3 +37,6 @@ position = Vector2(505, 447)
 
 [node name="Asteroid5" parent="Asteroids" instance=ExtResource("3_fahw2")]
 position = Vector2(518, 245)
+
+[node name="PlayerSpawnPos" type="Node2D" parent="."]
+position = Vector2(640, 360)
